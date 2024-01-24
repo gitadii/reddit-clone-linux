@@ -39,6 +39,9 @@ class AuthRepository {
       return _user.doc(uid).snapshots().map((event) => UserModel.fromMap(event.data() as Map<String, dynamic>));
     }
 
+      Stream<User?> get authStateChange => _auth.authStateChanges();
+       
+
   FutureEither<UserModel> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
