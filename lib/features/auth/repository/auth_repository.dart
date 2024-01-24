@@ -35,12 +35,13 @@ class AuthRepository {
   CollectionReference get _user =>
       _firestore.collection(FirebaseConstants.usersCollection);
 
+    // Streams to watch any changes made dynamically
       Stream<UserModel> getUserData(String uid) {
       return _user.doc(uid).snapshots().map((event) => UserModel.fromMap(event.data() as Map<String, dynamic>));
     }
 
       Stream<User?> get authStateChange => _auth.authStateChanges();
-       
+
 
   FutureEither<UserModel> signInWithGoogle() async {
     try {
