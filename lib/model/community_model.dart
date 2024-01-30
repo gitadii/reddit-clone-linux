@@ -17,7 +17,6 @@ class Community {
     required this.members,
     required this.mods,
   });
-  
 
   Community copyWith({
     String? id,
@@ -54,8 +53,9 @@ class Community {
       name: map['name'] as String,
       avatar: map['avatar'] as String,
       banner: map['banner'] as String,
-      members: List<String>.from(map['members'] as List<String>),
-      mods: List<String>.from(map['mods'] as List<String>),
+      members: (map['members'] as List<dynamic>?)?.cast<String>() ?? [],
+      mods: (map['mods'] as List<dynamic>?)?.cast<String>() ?? [],
+      // mods: List<String>.from(map['mods'] as List<String>),
     );
   }
 
@@ -67,23 +67,22 @@ class Community {
   @override
   bool operator ==(covariant Community other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.id == id &&
-      other.name == name &&
-      other.avatar == avatar &&
-      other.banner == banner &&
-      listEquals(other.members, members) &&
-      listEquals(other.mods, mods);
+
+    return other.id == id &&
+        other.name == name &&
+        other.avatar == avatar &&
+        other.banner == banner &&
+        listEquals(other.members, members) &&
+        listEquals(other.mods, mods);
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      name.hashCode ^
-      avatar.hashCode ^
-      banner.hashCode ^
-      members.hashCode ^
-      mods.hashCode;
+        name.hashCode ^
+        avatar.hashCode ^
+        banner.hashCode ^
+        members.hashCode ^
+        mods.hashCode;
   }
 }

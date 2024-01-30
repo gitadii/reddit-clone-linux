@@ -15,6 +15,12 @@ final communityControllerProvider =
   );
 });
 
+// Creating the stream provider for the getUserCommunity
+final userCommunitiesProvider = StreamProvider((ref) {
+  final communityController = ref.watch(communityControllerProvider.notifier);
+  return communityController.getUserCommunity();
+});
+
 class CommunityController extends StateNotifier<bool> {
   final CommunityRepository _communityRepository;
   final Ref _ref;
@@ -42,5 +48,11 @@ class CommunityController extends StateNotifier<bool> {
       showSnackBar(context, 'Community created');
       Routemaster.of(context).pop();
     });
+  }
+
+  // Getting the list of user communities from repository to display them in the community drawer
+  Stream<List<Community>> getUserCommunity() {
+    final uid = _ref.read(userProvider)!.uid;
+    return _communityRepository.getUserCommunity(uid);
   }
 }
