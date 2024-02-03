@@ -5,6 +5,7 @@ import 'package:redditclone_linux/core/commons/errorText.dart';
 import 'package:redditclone_linux/core/commons/loader.dart';
 import 'package:redditclone_linux/features/auth/controller/auth_controller.dart';
 import 'package:redditclone_linux/features/auth/controller/community_controller.dart';
+import 'package:routemaster/routemaster.dart';
 
 class CommunityScreen extends ConsumerWidget {
   final String name;
@@ -12,6 +13,10 @@ class CommunityScreen extends ConsumerWidget {
     super.key,
     required this.name,
   });
+
+  void nevigateToModTools(BuildContext context) {
+    Routemaster.of(context).push('/mod-tools/$name');
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -72,7 +77,9 @@ class CommunityScreen extends ConsumerWidget {
                                 ),
                                 community.mods.contains(user.uid)
                                     ? OutlinedButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          nevigateToModTools(context);
+                                        },
                                         style: ElevatedButton.styleFrom(
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
