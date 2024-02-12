@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:redditclone_linux/core/constants/constants.dart';
-import 'package:redditclone_linux/core/showSnackBar.dart';
+import 'package:redditclone_linux/core/utils.dart';
 import 'package:redditclone_linux/features/auth/controller/auth_controller.dart';
 import 'package:redditclone_linux/features/community/repository/community_repository.dart';
 import 'package:redditclone_linux/model/community_model.dart';
